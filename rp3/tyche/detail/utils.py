@@ -2,11 +2,11 @@ import numpy as np
 from functools import wraps
 
 def row(x):
-    return x[np.newaxis, :]
+    return np.array(x)[np.newaxis, :]
 
 
 def col(x):
-    return x[:, np.newaxis]
+    return np.array(x)[:, np.newaxis]
 
 
 def numpy_preprocessor(cls):
