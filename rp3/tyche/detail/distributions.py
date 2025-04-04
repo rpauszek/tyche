@@ -1,16 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from dataclasses import dataclass
-
-def row(x):
-    return x[np.newaxis, :]
+from .utils import numpy_preprocessor, row, col
 
 
-def col(x):
-    return x[:, np.newaxis]
-
-
-@dataclass
+@numpy_preprocessor
+@dataclass(frozen=True)
 class Normal:
     mu: np.ndarray
     tau: np.ndarray
@@ -28,9 +23,9 @@ class Normal:
         return np.sqrt(self.var)
 
     def pdf(self, x):
-        X = row(x) - col(self.mu)
-        lnP = -0.5 * np.log(2*np.pi/col(self.tau)) - col(self.tau)/2 * X**2
-        return np.exp(lnP)
+        x, m, t = row(x), col(self.mu), col(self.tau)
+        ln_p = -0.5 * np.log(2 * np.pi / t) - t / 2 * (x-m)**2
+        return np.exp(ln_p)
 
     def plot(self, x):
         for component in self.pdf(x):
