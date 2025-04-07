@@ -10,13 +10,17 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "numpy >2.0",
-    "matplotlib >3.9"
+    "matplotlib >3.9",
+    "pytest >8.0"
 ]
 
 [tool.poetry]
 packages = [
     { include = "rp3/tyche" }
 ]
+
+[tool.pytest.ini_options]
+addopts = "--ignore=scripts/"
 
 
 [build-system]
