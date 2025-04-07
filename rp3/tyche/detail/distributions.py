@@ -32,7 +32,7 @@ class Normal:
     @property
     def var(self):
         """Component variances."""
-        return self.tau**-1
+        return 1/self.tau
 
     @property
     def sigma(self):
